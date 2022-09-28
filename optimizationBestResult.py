@@ -1,4 +1,4 @@
-from msilib.schema import Directory
+
 import xml.etree.ElementTree as ET
 import pandas as pd
 import numpy as np
@@ -49,7 +49,8 @@ def xml_2_xlsx(path):
 def file_XLM_to_df(directory,cleaned=True):
     DataFrameDict={}
     CleanDataFrameDict={}
-    for filename in os.listdir(directory):
+    files = os.listdir(directory)
+    for filename in sorted(files):
         F = os.path.join(directory, filename)
         # checking if it is a file
         if os.path.isfile(F): 
@@ -98,6 +99,7 @@ _2017data=file_XLM_to_df("2017")
 _2018data=file_XLM_to_df("2018")
 _2019data=file_XLM_to_df("2019")
 _2020data=file_XLM_to_df("2020")
+
 
 
 _2015Best={}
