@@ -9,7 +9,7 @@ def normOfDiference(list1,list2):
     dif=np.subtract(arr1,arr2)
     return round(np.linalg.norm(dif),3)
 
-allBestData_df=pd.read_excel("BestResults.xlsx",index_col=0)
+allBestData_df=pd.read_excel("BestMedianResults.xlsx",index_col=0)
 
 
 
@@ -26,5 +26,12 @@ for ref in range(len(allBestData_df.columns)):
     data[rowName]=fila
 
 relationMatrix=pd.DataFrame(data,index=allBestData_df.columns)
-relationMatrix.to_excel("relationMatrix.xlsx")
+mIndex=[]
+for i in relationMatrix.columns.to_list():
+    mIndex.append((int(i[:4]),int(i[5:])))
+
+
+index = pd.MultiIndex.from_tuples(mIndex, names=["Year", "Week"])
+
+relationMatrix.to_excel("relationMatrixMedian.xlsx")
 print(relationMatrix.to_string())

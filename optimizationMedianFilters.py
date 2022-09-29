@@ -91,6 +91,27 @@ def normOfDiference(list1,list2):
     dif=np.subtract(arr1,arr2)
     return round(np.linalg.norm(dif),3)
 
+def optFilteredData(data):
+    BestFiltered={}
+    s=""
+    for i in data:
+        s=i[:4]
+        
+        _30Trades=data[i][data[i].Trades>30]
+        _Custom=_30Trades[_30Trades.Custom>=1]
+        _Resultmean1=_Custom[_Custom.Result.mean()+_Custom.Result.std()*2/3<_Custom.Result]
+        dataFiltered=_Resultmean1[round(_Resultmean1.Result.median(),2)==_Resultmean1.Result].sort_values('Equity DD %')
+
+        if len(dataFiltered)!=0:   
+            BestFiltered[i[5:-4]]=dataFiltered.iloc[0,:]
+        
+        else:
+            dataFiltered=_Resultmean1[round(_Resultmean1.Result.median()+0.01,2)==_Resultmean1.Result].sort_values('Equity DD %')
+            if len(dataFiltered)!=0: 
+                BestFiltered[i[5:-4]]=dataFiltered.iloc[0,:]
+            else: BestFiltered[i[5:-4]]=dataFiltered
+    print(f"****{s} succesfully Filtered**** ") 
+    return BestFiltered
 
 _2015data=file_XLM_to_df("2015")
 _2016data=file_XLM_to_df("2016")
@@ -99,57 +120,23 @@ _2018data=file_XLM_to_df("2018")
 _2019data=file_XLM_to_df("2019")
 _2020data=file_XLM_to_df("2020")
 
+_2015BestFiltered=optFilteredData(_2015data)
+_2016BestFiltered=optFilteredData(_2016data)
+_2017BestFiltered=optFilteredData(_2017data)
+_2018BestFiltered=optFilteredData(_2018data)
+_2019BestFiltered=optFilteredData(_2019data)
+_2020BestFiltered=optFilteredData(_2020data)
 
-_2015Best={}
-_2016Best={}
-_2017Best={}
-_2018Best={}
-_2019Best={}
-_2020Best={}
+# print(_2015BestFiltered)
+_2015df=pd.DataFrame(_2015BestFiltered)
+_2016df=pd.DataFrame(_2016BestFiltered)
+_2017df=pd.DataFrame(_2017BestFiltered)
+_2018df=pd.DataFrame(_2018BestFiltered)
+_2019df=pd.DataFrame(_2019BestFiltered)
+_2020df=pd.DataFrame(_2020BestFiltered)
+allBestMedianData_df=pd.concat([_2015df,_2016df,_2017df,_2018df,_2019df,_2020df],axis=1)
 
+allBestMedianData_df.to_excel("BestMedianResults.xlsx")
+print(_2015df.to_string())
+print("***************** 100 % *****************")
 
-for i in _2015data:
-    _2015Best[i[5:-4]]=_2015data[i][_2015data[i].Trades>30].iloc[9,:]
-
-    
-for i in _2016data:
-    _2016Best[i[5:-4]]=_2016data[i][_2016data[i].Trades>30].iloc[9,:]
-    
-for i in _2017data:
-    _2017Best[i[5:-4]]=_2017data[i][_2017data[i].Trades>30].iloc[9,:]
-    
-for i in _2018data:
-    _2018Best[i[5:-4]]= _2018data[i][_2018data[i].Trades>30].iloc[9,:]
-    
-for i in _2019data:
-    _2019Best[i[5:-4]]=_2019data[i][_2019data[i].Trades>30].iloc[9,:]
-    
-for i in _2020data:
-    _2020Best[i[5:-4]]=_2020data[i][_2020data[i].Trades>30].iloc[9,:]
-    
-
-_2015df=pd.DataFrame(_2015Best)
-
-_2016df=pd.DataFrame(_2016Best)
-
-_2017df=pd.DataFrame(_2017Best)
-
-_2018df=pd.DataFrame(_2018Best)
-
-_2019df=pd.DataFrame(_2019Best)
-
-_2020df=pd.DataFrame(_2020Best)
-
-allBestData_df=pd.concat([_2015df,_2016df,_2017df,_2018df,_2019df,_2020df],axis=1)
-
-
-list1=allBestData_df.iloc[-8:,0].to_list()
-# list2=allBestData_df.iloc[-8:,1].to_list()
-
-allBestData_df.to_excel("BestResults2.xlsx")
-
-
-
-
-
-print("BestResults.xlsx CREATED")
