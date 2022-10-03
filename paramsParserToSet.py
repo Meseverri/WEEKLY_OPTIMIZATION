@@ -31,5 +31,5 @@ dictionaryInputs={
     "{ToDate}":"2011.01.07",
     "{Report}":"test_AutoVWAP",
 }
-print(parseToSet(dictionaryInputs, "myCommonStrategyTester.ini"))
+print(parseToSet(dictionaryInputs, "myCommonStrategyTesterModel.ini"))
 
