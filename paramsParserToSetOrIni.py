@@ -4,6 +4,7 @@ import re
 def parseToSetOrIni (_params, baseFile):
     f = open(baseFile,"r", encoding='utf-16')
     baseFileConf = f.read()
+    f.close()
 
     for word, replacement in _params.items():
         replacement = str(replacement)
@@ -22,14 +23,14 @@ def parseToSetOrIni (_params, baseFile):
     return baseFileConf
 
     
-dictionaryInputs={
-    "{Expert}":"VWap EA.ex5",
-    "{ExpertParameters}":"test1.set",
-    "{Symbol}":"EURUSD",
-    "{Period}":"M5",
-    "{FromDate}":"2011.01.01",
-    "{ToDate}":"2011.01.07",
-    "{Report}":"test_AutoVWAP",
-}
-print(parseToSetOrIni(dictionaryInputs, "myCommonStrategyTesterModel.ini"))
+# dictionaryInputs={
+#     "{Expert}":"VWap EA.ex5",
+#     "{ExpertParameters}":"test1.set",
+#     "{Symbol}":"EURUSD",
+#     "{Period}":"M5",
+#     "{FromDate}":"2011.01.01",
+#     "{ToDate}":"2011.01.07",
+#     "{Report}":"test_AutoVWAP",
+# }
+# print(parseToSetOrIni(dictionaryInputs, "myCommonStrategyTesterModel.ini"))
 
