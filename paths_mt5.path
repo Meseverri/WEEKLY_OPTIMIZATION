@@ -1,9 +1,13 @@
+Output Backtest and Optimization
+C:\Users\mesev\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075
 
 Path to set files
 C:\Users\mesev\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\MQL5\Profiles\Tester
 
 Path to terminal executer
-"C:\Program Files\MetaTrader 5\terminal64.exe"
+"C:\Program Files\MetaTrader 5\terminal64.exe"  
+cmd--> terminal64.exe /config:"C:\Users\mesev\Documents\BackUp\TRABAJO\FUDO\FUDO TECHNOLOGIES\Backtest MT5\EURUSD\WEEKLY_OPTIMIZATION\myCommonStrategyTester.ini"
 
 Path to configuration start for Strategy tester and Optimization
 C:\Users\mesev\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\config
+

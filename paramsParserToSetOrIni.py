@@ -1,7 +1,7 @@
 from cmath import nan
 import re
 
-def parseToSet (_params, baseFile):
+def parseToSetOrIni (_params, baseFile):
     f = open(baseFile,"r", encoding='utf-16')
     baseFileConf = f.read()
 
@@ -31,5 +31,5 @@ dictionaryInputs={
     "{ToDate}":"2011.01.07",
     "{Report}":"test_AutoVWAP",
 }
-print(parseToSet(dictionaryInputs, "myCommonStrategyTesterModel.ini"))
+print(parseToSetOrIni(dictionaryInputs, "myCommonStrategyTesterModel.ini"))
 
