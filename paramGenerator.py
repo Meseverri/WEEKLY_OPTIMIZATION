@@ -36,7 +36,29 @@ index = pd.MultiIndex.from_tuples(mIndex, names=["Year", "Week"])
 
 RelationMatrix=pd.DataFrame(relationMatrix.values,index,columns=index)
 AllBestData=pd.DataFrame(allBestData_df.values,allBestData_df.index,columns=index)
-    
+
+
+dictionaryInputs={"{ClosePercentInput}":50,
+"{SlFactorInput}":nan,
+"{TpFactorInput}":nan,
+"{riskPercentageInput}":1,
+"{riskRewardTargetInput}":2,
+"{minHoldingPeriodInput}":0,
+"{atrPeriodInput}":None,
+"{deltaInput}":None,
+"{optionInput}":None,
+"{fastEmaPeriodInput}":None,
+"{slowEMAPeriodInput}":None,
+"{vwapZoneMultiplyerInput}":None,
+"{switchCandelConditionInput}":0,
+"{maxDrowdownInput}":100,
+"{maxDrowdownAnualInput}":100,
+"{maxDrowdownMonthlyInput}":100,
+"{maxDrowdownDailyInput}":15,
+"{TargetAnualyInput}":80,
+"{TargetMonthlyInput}":80,
+"{TargetDailyInput}":20}
+
 """Usaremos multiples estrategias de eleccion y estimacion de parametros
         E1: ubservamos el entorn al rededor de la semana +-2 respecto a la sem de referencia
         E2: tomamos 4 hacia atra
