@@ -10,7 +10,7 @@ def has53Weeks(year):
         return True
     else: return False
 
-def generateFileOpt(fromDate, toDate, week):
+def generateFileOpt(fromDate, toDate, week, year):
     dictionaryInputs={
         "{Expert}":"VWap EA.ex5",
         "{ExpertParameters}":"VWapOpt.set",
@@ -23,12 +23,18 @@ def generateFileOpt(fromDate, toDate, week):
 
     parsedString = parseToSetOrIni(dictionaryInputs, "myCommonStrategyOptimazerModel.ini")
     
-    f = open(f"myCommonStrategyOptimazer{fromDate.year}W{week}.ini","w", encoding='utf-16')
+    f = open(f"AllOpt/{year}/myCommonStrategyOptimazer{year}W{week}.ini","w", encoding='utf-16')
 
     f.write(parsedString)
 
 
-generateFileOpt(datetime(2020,12,28),datetime(2021,1,3),53)
-#print(Week(2021,1).monday())
+#
+#print(Week(2015,53).monday())
+
+
+for year in range(2015,2022):
+    weeks = 53 if has53Weeks(year) else 52
+    for week in range(1,weeks+1):
+        generateFileOpt(Week(year,week).monday(),Week(year,week).sunday(),week,year)
 
     
