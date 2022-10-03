@@ -1,4 +1,4 @@
-from msilib.schema import Directory
+
 import xml.etree.ElementTree as ET
 import pandas as pd
 import numpy as np
@@ -49,7 +49,7 @@ def xml_2_xlsx(path):
 def file_XLM_to_df(directory,cleaned=True):
     DataFrameDict={}
     CleanDataFrameDict={}
-    for filename in os.listdir(directory):
+    for filename in sorted(os.listdir(directory)):
         F = os.path.join(directory, filename)
         # checking if it is a file
         if os.path.isfile(F): 
