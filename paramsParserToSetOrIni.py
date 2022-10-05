@@ -24,6 +24,26 @@ def parseToSetOrIni (_params, baseFile):
 
     
 # dictionaryInputs={
+#    '{ClosePercentInput}':50,
+#     "{SlFactorInput}":None,
+#     "{TpFactorInput}":None,
+#     "{riskPercentageInput}":1,
+#     "{riskRewardTargetInput}":2,
+#     "{minHoldingPeriodInput}":0,
+#     "{atrPeriodInput}":None,
+#     "{deltaInput}":None,
+#     "{optionInput}":None,
+#     "{fastEmaPeriodInput}":None,
+#     "{slowEMAPeriodInput}":None,
+#     "{vwapZoneMultiplyerInput}":None,
+#     "{switchCandelConditionInput}":0,
+#     "{maxDrowdownInput}":100,
+#     "{maxDrowdownAnualInput}":100,
+#     "{maxDrowdownMonthlyInput}":100,
+#     "{maxDrowdownDailyInput}":15,
+#     "{TargetAnualyInput}":80,
+#     "{TargetMonthlyInput}":80,
+#     "{TargetDailyInput}":20,
 #     "{Expert}":"VWap EA.ex5",
 #     "{ExpertParameters}":"test1.set",
 #     "{Symbol}":"EURUSD",
@@ -32,5 +52,5 @@ def parseToSetOrIni (_params, baseFile):
 #     "{ToDate}":"2011.01.07",
 #     "{Report}":"test_AutoVWAP",
 # }
-# print(parseToSetOrIni(dictionaryInputs, "myCommonStrategyTesterModel.ini"))
+# print(parseToSetOrIni(dictionaryInputs, "myCommonStrategyTesterModel2.ini"))
 
