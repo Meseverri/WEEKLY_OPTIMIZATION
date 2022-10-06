@@ -152,7 +152,10 @@ dictionaryInputs={"{ClosePercentInput}":50,
 _weeksGeneratedParams = {}
 for i in range(42,50):
     _completeParams = dictionaryInputs | ParamEstimator(i,RelationMatrix,AllBestData,Estrategy=1,dropFistYear=True) 
-    print(parseToSetOrIni(_completeParams, "GeneralInputConf.set"))
+    if i > 0 and i <10: i = f"0{i}"
+    f = open(f"2021_BT/W{i}.set","w", encoding='utf-16')
+    f.write(parseToSetOrIni(_completeParams, "GeneralInputConf.set"))
+    f.close()
 
 
 
