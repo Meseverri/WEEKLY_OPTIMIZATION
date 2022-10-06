@@ -33,7 +33,8 @@ def generateFileOpt(fromDate, toDate, week, year):
 #
 #print(Week(2015,53).monday())
 
-
+generateFileOpt(Week(2014,51).monday(),Week(2014,51).sunday(),51,2014)
+generateFileOpt(Week(2014,52).monday(),Week(2014,52).sunday(),52,2014)
 for year in range(2015,2022):
     weeks = 53 if has53Weeks(year) else 52
     for week in range(1,weeks+1):
