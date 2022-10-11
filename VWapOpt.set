@@ -1,0 +1,25 @@
+; Trade inputs
+ClosePercent=50||30.0||3.000000||300.000000||N
+SlFactor=1.2||0.5||0.1||5.0||Y
+TpFactor=1.1||0.5||0.1||10.0||Y
+riskPercentage=1.0||1||1||10||N
+riskRewardTarget=2.0||2.0||0.200000||20.000000||N
+minHoldingPeriod=0||0||1||10||N
+atrPeriod=20||15||1||24||Y
+; Dinamic risk inputs
+delta=0.34||0.0||0.01||0.5||Y
+option=1||0||1||2||Y
+; Ema Inputs
+fastEmaPeriod=10||3||1||10||Y
+slowEMAPeriod=24||11||1||24||Y
+; Indicators inputs
+vwapZoneMultiplyer=2||2||1||10||N
+switchCandelCondition=0||0||1||10||N
+; Equity managment imputs
+maxDrowdown=100.0||100.0||10.000000||1000.000000||N
+maxDrowdownAnual=100.0||100.0||10.000000||1000.000000||N
+maxDrowdownMonthly=100.0||100.0||10.000000||1000.000000||N
+maxDrowdownDaily=15.0||15.0||1.500000||150.000000||N
+TargetAnualy=80.0||80.0||8.000000||800.000000||N
+TargetMonthly=80.0||80.0||8.000000||800.000000||N
+TargetDaily=20.0||20.0||2.000000||200.000000||N
