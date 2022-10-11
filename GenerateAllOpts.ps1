@@ -4,7 +4,7 @@ $fileArray = Get-ChildItem -Path "$($ProyectPath)\AllOpt" -Recurse -Filter *.ini
 
 $totalfiles = $fileArray.length
 $i = 1
-$percent = [math]::round($i/$totalfiles, 5)
+$percent = [math]::round($i/$totalfiles, 5)*100
 $fileArray |
 Foreach-Object {
     Write-Progress -Activity "Optimizaciones en Proceso " -Status "$percent% Complete:" -PercentComplete $percent
@@ -25,7 +25,7 @@ Foreach-Object {
     }
     Write-Host "-----------------------------------------------------------------------------------------------"
     $i++ 
-    $percent = [math]::round($i/$totalfiles, 5)
+    $percent = [math]::round($i/$totalfiles, 5)*100
 }
 
 Write-Host "Todos los .ini ejecutados"
