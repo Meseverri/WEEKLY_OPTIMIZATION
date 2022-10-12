@@ -2,6 +2,8 @@ $jsonPath = Get-Content 'D:\FUDO TECH\WEEKLY_OPTIMIZATION\confPath.json' | Out-S
 $terminalPath = $jsonPath.terminalPath
 $ProyectPath = $jsonPath.proyectPath
 $mt5OutPutPath  = $jsonPath.mt5OutPutPath
+$optResult = "$($mt5OutPutPath)\$($yearWeek).xml"
+
 cd $terminalPath
 
 $fileArray = Get-ChildItem -Path "$($ProyectPath)\AllOpt" -Recurse -Filter *.ini 
@@ -16,11 +18,9 @@ Foreach-Object {
     $yearWeek = $_.Name.Substring(25,$_.Name.length-4-25)
     Write-Host $yearWeek
     if (!(Test-Path "$($ProyectPath)\$($year)\$($yearWeek).xml")) {
-        #$mt5Process
         do {
             .\terminal64.exe /config:$($_.FullName)
             Start-Sleep 5
-            $optResult = "C:\Users\mesev\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\$($yearWeek).xml"
             $mt5Process = Get-Process "metatester64"
             while (!(Test-Path $($optResult)) -and ($mt5Process -ne $null)) { 
                 Start-Sleep 30
