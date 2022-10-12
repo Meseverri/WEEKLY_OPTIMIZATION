@@ -16,11 +16,17 @@ Foreach-Object {
     $yearWeek = $_.Name.Substring(25,$_.Name.length-4-25)
     Write-Host $yearWeek
     if (!(Test-Path "$($ProyectPath)\$($year)\$($yearWeek).xml")) {
-        .\terminal64.exe /config:$($_.FullName)
-        $optResult = "$mt5OutPutPath\$($yearWeek).xml"
-        while (!(Test-Path $($optResult))) { 
-            Start-Sleep 30 
-        }
+        #$mt5Process
+        do {
+            .\terminal64.exe /config:$($_.FullName)
+            Start-Sleep 5
+            $optResult = "C:\Users\mesev\AppData\Roaming\MetaQuotes\Terminal\D0E8209F77C8CF37AD8BF550E51FF075\$($yearWeek).xml"
+            $mt5Process = Get-Process "metatester64"
+            while (!(Test-Path $($optResult)) -and ($mt5Process -ne $null)) { 
+                Start-Sleep 30
+                $mt5Process = Get-Process "metatester64"
+            }
+        } while (($mt5Process -eq $null) -and !(Test-Path $($optResult)))
         Move-Item -Path $($optResult)  -Destination "$($ProyectPath)\$($year)"  -PassThru
         Write-Host "Se ha movido el archivo:"
         Write-Host "$($optResult)"
@@ -33,7 +39,3 @@ Foreach-Object {
 }
 
 Write-Host "Todos los .ini ejecutados"
-
-
-
-
