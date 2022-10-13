@@ -2,7 +2,7 @@ $jsonPath = Get-Content 'D:\FUDO TECH\WEEKLY_OPTIMIZATION\confPath.json' | Out-S
 $terminalPath = $jsonPath.terminalPath
 $ProyectPath = $jsonPath.proyectPath
 $mt5OutPutPath  = $jsonPath.mt5OutPutPath
-$optResult = "$($mt5OutPutPath)\$($yearWeek).xml"
+
 
 cd $terminalPath
 
@@ -16,6 +16,7 @@ Foreach-Object {
     Write-Progress -Activity "Optimizaciones en Proceso " -Status "$percent% Complete:" -PercentComplete $percent
     $year = $_.Name.Substring(25,4)
     $yearWeek = $_.Name.Substring(25,$_.Name.length-4-25)
+    $optResult = "$($mt5OutPutPath)\$($yearWeek).xml"
     Write-Host $yearWeek
     if (!(Test-Path "$($ProyectPath)\$($year)\$($yearWeek).xml")) {
         do {
