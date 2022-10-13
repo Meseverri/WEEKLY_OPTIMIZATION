@@ -150,7 +150,7 @@ dictionaryInputs={"{ClosePercentInput}":50,
         E3: comparando 53 semanas hacia atras"""
 
 _weeksGeneratedParams = {}
-for i in range(42,50):
+for i in range(1,53):
     _completeParams = dictionaryInputs | ParamEstimator(i,RelationMatrix,AllBestData,Estrategy=1,dropFistYear=True) 
     if i > 0 and i <10: i = f"0{i}"
     f = open(f"2021_BT_sets/W{i}.set","w", encoding='utf-16')

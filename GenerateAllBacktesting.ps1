@@ -8,7 +8,7 @@ $fileArray = Get-ChildItem -Path "$($ProyectPath)\2021_BT_ini" -Recurse -Filter 
 
 $totalfiles = $fileArray.length
 $i = 1
-$percent = [math]::round($i/$totalfiles, 5)
+$percent = [math]::round($i/$totalfiles, 5)*100
 $fileArray |
 Foreach-Object {
     Write-Progress -Activity "Backtesting en Proceso " -Status "$percent% Complete:" -PercentComplete $percent
@@ -32,7 +32,7 @@ Foreach-Object {
     Remove-Item "$($mt5OutPutPath)\MQL5\Profiles\Tester\$($yearWeek.Substring(4)).set"
     Write-Host "-----------------------------------------------------------------------------------------------"
     $i++ 
-    $percent = [math]::round($i/$totalfiles, 5)
+    $percent = [math]::round($i/$totalfiles, 5)*100
 }
 
 Write-Host "Todos los .ini ejecutados"

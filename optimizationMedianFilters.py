@@ -32,7 +32,7 @@ def xml_2_xlsx(path):
     dict={'Pass':int, 'Result': float, 'Profit': float, 'Expected Payoff': float, 'Profit Factor': float,
        'Recovery Factor': float, 'Sharpe Ratio': float, 'Custom': float, 'Equity DD %': float, 'Trades': int,
        'SlFactor': float, 'TpFactor': float, 'atrPeriod': int, 'delta': float, 'option': int, 'fastEmaPeriod': int,
-       'slowEMAPeriod': int, 'vwapZoneMultiplyer': int}
+       'slowEMAPeriod': int}
    # print(df.astype(dict))
     df=df.astype(dict)
     return df 
@@ -74,8 +74,7 @@ def file_XLM_to_df(directory,cleaned=True):
                         'delta':np.mean, 
                         'option':lambda x: stats.mode(x,keepdims=True)[0][0], 
                         'fastEmaPeriod':lambda x: stats.mode(x,keepdims=True)[0][0],
-                        'slowEMAPeriod':lambda x: stats.mode(x,keepdims=True)[0][0], 
-                        'vwapZoneMultiplyer':lambda x: stats.mode(x,keepdims=True)[0][0]})
+                        'slowEMAPeriod':lambda x: stats.mode(x,keepdims=True)[0][0]})
                 DF['delta']= DF['delta'].round(2)
                 DF=DF.sort_values(by=["Result"],ascending=False,)
 
@@ -126,6 +125,14 @@ _2017BestFiltered=optFilteredData(_2017data)
 _2018BestFiltered=optFilteredData(_2018data)
 _2019BestFiltered=optFilteredData(_2019data)
 _2020BestFiltered=optFilteredData(_2020data)
+
+print(_2015BestFiltered)
+print(_2016BestFiltered)
+print(_2017BestFiltered)
+print(_2018BestFiltered)
+print(_2019BestFiltered)
+print(_2020BestFiltered)
+
 
 # print(_2015BestFiltered)
 _2015df=pd.DataFrame(_2015BestFiltered)
