@@ -98,7 +98,7 @@ def ParamEstimator(ref,relationMatrix,allMedianResults,Estrategy=1,dropFistYear=
     return new_configuration
 
 
-allBestData_df=pd.read_excel("BestMedianResults.xlsx",index_col=0)
+allBestData_df=pd.read_excel("BestResults.xlsx",index_col=0)
 
 data={}
 for ref in range(len(allBestData_df.columns)):   

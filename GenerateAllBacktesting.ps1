@@ -1,4 +1,4 @@
-$jsonPath = Get-Content 'D:\FUDO TECH\WEEKLY_OPTIMIZATION\confPath.json' | Out-String | ConvertFrom-Json
+$jsonPath = Get-Content 'C:\Users\mesev\Documents\BackUp\TRABAJO\FUDO\FUDO TECHNOLOGIES\Backtest MT5\EURUSD\WEEKLY_OPTIMIZATION\confPath.json' | Out-String | ConvertFrom-Json
 $terminalPath = $jsonPath.terminalPath
 $ProyectPath = $jsonPath.proyectPath
 $mt5OutPutPath  = $jsonPath.mt5OutPutPath
@@ -21,7 +21,7 @@ Foreach-Object {
         .\terminal64.exe /config:$($_.FullName)
         $btResult = "$($mt5OutPutPath)\$($yearWeek).htm"
         while (!(Test-Path $($btResult))) { 
-            Start-Sleep 10 
+            Start-Sleep 6
         }
         Move-Item -Path $($btResult)  -Destination "$($ProyectPath)\$($year)_BT_results"  -PassThru
         Write-Host "Se ha movido el archivo:"
