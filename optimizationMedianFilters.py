@@ -118,6 +118,8 @@ _2017data=file_XLM_to_df("2017")
 _2018data=file_XLM_to_df("2018")
 _2019data=file_XLM_to_df("2019")
 _2020data=file_XLM_to_df("2020")
+_2021data=file_XLM_to_df("2021")
+
 
 _2015BestFiltered=optFilteredData(_2015data)
 _2016BestFiltered=optFilteredData(_2016data)
@@ -125,13 +127,8 @@ _2017BestFiltered=optFilteredData(_2017data)
 _2018BestFiltered=optFilteredData(_2018data)
 _2019BestFiltered=optFilteredData(_2019data)
 _2020BestFiltered=optFilteredData(_2020data)
+_2021BestFiltered=optFilteredData(_2021data)
 
-print(_2015BestFiltered)
-print(_2016BestFiltered)
-print(_2017BestFiltered)
-print(_2018BestFiltered)
-print(_2019BestFiltered)
-print(_2020BestFiltered)
 
 
 # print(_2015BestFiltered)
@@ -141,7 +138,9 @@ _2017df=pd.DataFrame(_2017BestFiltered)
 _2018df=pd.DataFrame(_2018BestFiltered)
 _2019df=pd.DataFrame(_2019BestFiltered)
 _2020df=pd.DataFrame(_2020BestFiltered)
-allBestMedianData_df=pd.concat([_2015df,_2016df,_2017df,_2018df,_2019df,_2020df],axis=1)
+_2021df=pd.DataFrame(_2021BestFiltered)
+
+allBestMedianData_df=pd.concat([_2015df,_2016df,_2017df,_2018df,_2019df,_2020df,_2021df],axis=1)
 
 allBestMedianData_df.to_excel("BestMedianResults.xlsx")
 print(_2015df.to_string())

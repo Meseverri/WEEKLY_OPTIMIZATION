@@ -98,6 +98,8 @@ _2017data=file_XLM_to_df("2017")
 _2018data=file_XLM_to_df("2018")
 _2019data=file_XLM_to_df("2019")
 _2020data=file_XLM_to_df("2020")
+_2021data=file_XLM_to_df("2021")
+
 
 
 
@@ -107,6 +109,7 @@ _2017Best={}
 _2018Best={}
 _2019Best={}
 _2020Best={}
+_2021Best={}
 
 
 for i in _2015data:
@@ -127,6 +130,9 @@ for i in _2019data:
     
 for i in _2020data:
     _2020Best[i[5:-4]]=_2020data[i][_2020data[i].Trades>30].iloc[0,:]
+
+for i in _2021data:
+    _2021Best[i[5:-4]]=_2021data[i][_2021data[i].Trades>30].iloc[0,:]
     
 
 _2015df=pd.DataFrame(_2015Best)
@@ -141,7 +147,9 @@ _2019df=pd.DataFrame(_2019Best)
 
 _2020df=pd.DataFrame(_2020Best)
 
-allBestData_df=pd.concat([_2015df,_2016df,_2017df,_2018df,_2019df,_2020df],axis=1)
+_2021df=pd.DataFrame(_2021Best)
+
+allBestData_df=pd.concat([_2015df,_2016df,_2017df,_2018df,_2019df,_2020df,_2021df],axis=1)
 
 
 list1=allBestData_df.iloc[-8:,0].to_list()

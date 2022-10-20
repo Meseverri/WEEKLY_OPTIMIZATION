@@ -19,11 +19,12 @@ def getAllHtmlStrings(directory):
     return allHtmlStrings
 
 
-def getRelevantInfoOfHtml(tree):
+def getRelevantInfoOfHtml(tree,i):
     _info = {}
     netProfit = float(tree.xpath("//td[text()='Total Net Profit:']/following-sibling::td[1]/b/text()")[0].replace(" ", ""))
     _info['Total Net Profit'] = netProfit
     initialDeposit = float(tree.xpath("//td[text()='Initial Deposit:']/following-sibling::td[1]/b/text()")[0].replace(" ", ""))
+    print(i, " ", initialDeposit)
     relativeProfit = (netProfit*100)/initialDeposit
     _info['Relative Profit'] = relativeProfit
     dd = tree.xpath("//td[text()='Balance Drawdown Relative:']/following-sibling::td[1]/b/text()")[0].replace(" ", "")
@@ -37,7 +38,7 @@ def getRelevantInfoOfHtml(tree):
 def getRelevantInfoAllHtml(allHtmlStrings):
     _relevantInfoAllHtml = {}
     for i, htmlString in enumerate(allHtmlStrings):
-        _relevantInfoAllHtml[i+1] = getRelevantInfoOfHtml(html.fromstring(htmlString))
+        _relevantInfoAllHtml[i+1] = getRelevantInfoOfHtml(html.fromstring(htmlString),i+1)
 
     return _relevantInfoAllHtml
 
@@ -51,9 +52,21 @@ def getRelevantInfoDF(resultStrategyFolder):
     return weeksInfoDF
 
 
-medianS1 = getRelevantInfoDF("2021_BT_results_Median_S1")
+#medianS1 = getRelevantInfoDF("2021_BT_results_Median_S1")
+#medianS1_4 = getRelevantInfoDF("2021_BT_results_Median_S1_4")
+#medianS1_4_2 = getRelevantInfoDF("2021_BT_results_Median_S1_4_2")
+medianS2 = getRelevantInfoDF("2021_BT_results_Median_S2")
+medianS2_1_1 = getRelevantInfoDF("2021_BT_results_Median_S2_1.1")
 
-plt.plot(medianS1.index.values, medianS1['Relative Profit Acumulated'], label='Median S1')
+
+
+
+#plt.plot(medianS1.index.values, medianS1['Relative Profit Acumulated'], label='Median S1')
+#plt.plot(medianS1_4.index.values, medianS1_4['Relative Profit Acumulated'], label='Median S1 4')
+#plt.plot(medianS1_4_2.index.values, medianS1_4_2['Relative Profit Acumulated'], label='Median S1 4 2')
+plt.plot(medianS2.index.values, medianS2['Relative Profit Acumulated'], label='Median S2')
+plt.plot(medianS2_1_1.index.values, medianS2_1_1['Relative Profit Acumulated'], label='Median S2 1.1')
+
 plt.axhline(0, color='r', linestyle = ':')
 plt.xlabel('Week')
 plt.ylabel('Relative Balance Accumulated')
