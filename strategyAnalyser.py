@@ -51,22 +51,34 @@ def getRelevantInfoDF(resultStrategyFolder):
 
     return weeksInfoDF
 
+median_2020_S2 = getRelevantInfoDF("2020_BT_results_Median_S2")
+median_2020_S2_1 = getRelevantInfoDF("2020_BT_results_Median_S2.1")
+plt.plot(median_2020_S2.index.values, median_2020_S2['Relative Profit Acumulated'], label='Median S2 2020')
+plt.plot(median_2020_S2_1.index.values, median_2020_S2_1['Relative Profit Acumulated'], label='Median S2.1 2020')
+plt.axhline(0, color='r', linestyle = ':')
+plt.xlabel('Week')
+plt.ylabel('Relative Balance Accumulated')
+plt.title('Relative Balance Accumulated Graphic', loc='center')
+plt.legend()
+plt.show()
 
-#medianS1 = getRelevantInfoDF("2021_BT_results_Median_S1")
-#medianS1_4 = getRelevantInfoDF("2021_BT_results_Median_S1_4")
-#medianS1_4_2 = getRelevantInfoDF("2021_BT_results_Median_S1_4_2")
-medianS2 = getRelevantInfoDF("2021_BT_results_Median_S2")
-medianS2_1_1 = getRelevantInfoDF("2021_BT_results_Median_S2_1.1")
+
+median_2021_S2 = getRelevantInfoDF("2021_BT_results_Median_S2")
+median_2021_S2_1 = getRelevantInfoDF("2021_BT_results_Median_S2.1")
+plt.plot(median_2021_S2.index.values, median_2021_S2['Relative Profit Acumulated'], label='Median S2 2021')
+plt.plot(median_2021_S2_1.index.values, median_2021_S2_1['Relative Profit Acumulated'], label='Median S2.1 2021')
+plt.axhline(0, color='r', linestyle = ':')
+plt.xlabel('Week')
+plt.ylabel('Relative Balance Accumulated')
+plt.title('Relative Balance Accumulated Graphic', loc='center')
+plt.legend()
+plt.show()
 
 
-
-
-#plt.plot(medianS1.index.values, medianS1['Relative Profit Acumulated'], label='Median S1')
-#plt.plot(medianS1_4.index.values, medianS1_4['Relative Profit Acumulated'], label='Median S1 4')
-#plt.plot(medianS1_4_2.index.values, medianS1_4_2['Relative Profit Acumulated'], label='Median S1 4 2')
-plt.plot(medianS2.index.values, medianS2['Relative Profit Acumulated'], label='Median S2')
-plt.plot(medianS2_1_1.index.values, medianS2_1_1['Relative Profit Acumulated'], label='Median S2 1.1')
-
+median_2022_S2 = getRelevantInfoDF("2022_BT_results_Median_S2")
+median_2022_S2_1 = getRelevantInfoDF("2022_BT_results_Median_S2.1")
+plt.plot(median_2022_S2.index.values, median_2022_S2['Relative Profit Acumulated'], label='Median S2 2022')
+plt.plot(median_2022_S2_1.index.values, median_2022_S2_1['Relative Profit Acumulated'], label='Median S2.1 2022')
 plt.axhline(0, color='r', linestyle = ':')
 plt.xlabel('Week')
 plt.ylabel('Relative Balance Accumulated')
