@@ -30,10 +30,10 @@ def generateFileOpt(fromDate, toDate, week, year):
     f.close()
 
 
-year = 2021
+year = 2022
 weeks = 53 if has53Weeks(year) else 52
 
-for week in range(1,weeks+1):
+for week in range(1,44):
     #print(f"Year {year} Week {week}")
     if week > 0 and week < 10: week = f"0{week}"
     generateFileOpt(Week(year,int(week)).monday(),Week(year,int(week)).sunday(),week,year)
