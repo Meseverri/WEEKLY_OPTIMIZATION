@@ -143,6 +143,5 @@ _2021df=pd.DataFrame(_2021BestFiltered)
 allBestMedianData_df=pd.concat([_2015df,_2016df,_2017df,_2018df,_2019df,_2020df,_2021df],axis=1)
 
 allBestMedianData_df.to_excel("BestMedianResults.xlsx")
-print(_2015df.to_string())
 print("***************** 100 % *****************")
 
