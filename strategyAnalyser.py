@@ -81,11 +81,11 @@ def getRelevantInfoDF(resultStrategyFolder):
 
 #median_2022_S2 = getRelevantInfoDF("2022_BT_results_Median_S2")
 median_2022_S2_1 = getRelevantInfoDF("2022_BT_results_Median_S2.1")
-#median_2022_S2_2 = getRelevantInfoDF("2022_BT_results")
+median_2022_S2_2 = getRelevantInfoDF("2022_BT_results_Median_S2_2.0")
 
 #plt.plot(median_2022_S2.index.values, median_2022_S2['Relative Profit Acumulated'], label='Median S2 2022')
-plt.plot(median_2022_S2_1.index.values, median_2022_S2_1['Relative Profit Acumulated'], label='Median S2.1 2022')
-#plt.plot(median_2022_S2_2.index.values, median_2022_S2_2['Relative Profit Acumulated'], label='Median S2.2 2022')
+plt.plot(median_2022_S2_1.index.values, median_2022_S2_1['Relative Profit Acumulated'], label='Median S2.1 2022 hasta W43 version 1.0')
+plt.plot(median_2022_S2_2.index.values, median_2022_S2_2['Relative Profit Acumulated'], label='Median S2 2.0 2022 hasta W44')
 plt.axhline(0, color='r', linestyle = ':')
 plt.xlabel('Week')
 plt.ylabel('Relative Balance Accumulated')
