@@ -84,7 +84,7 @@ def refTupleGenerator(refY,refW,Estrategy=1):
     
     if Estrategy==4: 
         refYLower=refY
-        refWLower=refW-8
+        refWLower=refW-1
 
         refYUpper=refY
         refWUpper=refW - 1
@@ -103,7 +103,7 @@ def refTupleGenerator(refY,refW,Estrategy=1):
     return data
 
 def ParamEstimator(ref,relationMatrix,allMedianResults,Estrategy=1,dropFistYear=False):
-    years=[2016,2017,2018,2019,2020]
+    years=[2017,2018,2019,2020,2021]
     if dropFistYear:years=years[1:]
     newRow=[]
 
@@ -151,7 +151,8 @@ def ParamEstimator(ref,relationMatrix,allMedianResults,Estrategy=1,dropFistYear=
     return new_configuration
 
 def ParamEstimator2(ref,relationMatrix,allMedianResults,Estrategy=2,dropFistYear=False):
-    Ref=refTupleGenerator(2021,ref,Estrategy)
+    Ref=refTupleGenerator(2022,ref,Estrategy)
+    print(Ref)
     refWeek = allMedianResults.loc[:,Ref[0]:Ref[1]].T
 
     #print(refWeek.to_string())
@@ -280,7 +281,7 @@ dictionaryInputs={"{ClosePercentInput}":50,
         """
 
 _weeksGeneratedParams = {}
-for i in range(1,53):
+for i in range(1,50):
     _completeParams = dictionaryInputs | ParamEstimator53(i,RelationMatrix,AllBestData,Estrategy=2,dropFistYear=True) 
     if i > 0 and i <10: i = f"0{i}"
     f = open(f"2022_BT_sets/W{i}.set","w", encoding='utf-16')

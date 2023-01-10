@@ -12,7 +12,7 @@ def has53Weeks(year):
 
 def generateFileOpt(fromDate, toDate, week, year):
     dictionaryInputs={
-        "{Expert}":"VWap EA 2.ex5",
+        "{Expert}":"VWap EA original.ex5",
         "{ExpertParameters}":"VWapOpt.set",
         "{Symbol}":"EURUSD",
         "{Period}":"M5",
@@ -35,15 +35,15 @@ def generateFileOpt(fromDate, toDate, week, year):
 
 generateFileOpt(Week(2014,51).monday(),Week(2014,51).sunday(),51,2014)
 generateFileOpt(Week(2014,52).monday(),Week(2014,52).sunday(),52,2014)
-for year in range(2015,2022):
+for year in range(2015,2023):
     weeks = 53 if has53Weeks(year) else 52
     for week in range(1,weeks+1):
         #print(f"Year {year} Week {week}")
         if week > 0 and week < 10: week = f"0{week}"
         generateFileOpt(Week(year,int(week)).monday(),Week(year,int(week)).sunday(),week,year)
 
-year = 2022
-for week in range(1,46):
-        #print(f"Year {year} Week {week}")
-        if week > 0 and week < 10: week = f"0{week}"
-        generateFileOpt(Week(year,int(week)).monday(),Week(year,int(week)).sunday(),week,year)    
+# year = 2023
+# for week in range(1,50):
+#         #print(f"Year {year} Week {week}")
+#         if week > 0 and week < 10: week = f"0{week}"
+#         generateFileOpt(Week(year,int(week)).monday(),Week(year,int(week)).sunday(),week,year)    

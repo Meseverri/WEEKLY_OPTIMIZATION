@@ -1,7 +1,4 @@
-from cProfile import label
-import json
 import os
-from turtle import color
 import pandas as pd
 from lxml import html
 import matplotlib.pyplot as plt
@@ -24,7 +21,7 @@ def getRelevantInfoOfHtml(tree,i):
     netProfit = float(tree.xpath("//td[text()='Total Net Profit:']/following-sibling::td[1]/b/text()")[0].replace(" ", ""))
     _info['Total Net Profit'] = netProfit
     initialDeposit = float(tree.xpath("//td[text()='Initial Deposit:']/following-sibling::td[1]/b/text()")[0].replace(" ", ""))
-    print(i, " ", initialDeposit)
+    #print(i, " ", initialDeposit)
     relativeProfit = (netProfit*100)/initialDeposit
     _info['Relative Profit'] = relativeProfit
     dd = tree.xpath("//td[text()='Balance Drawdown Relative:']/following-sibling::td[1]/b/text()")[0].replace(" ", "")
@@ -51,41 +48,50 @@ def getRelevantInfoDF(resultStrategyFolder):
 
     return weeksInfoDF
 
-#median_2020_S2 = getRelevantInfoDF("2020_BT_results_Median_S2")
-#median_2020_S2_1 = getRelevantInfoDF("2020_BT_results_Median_S2.1")
-#plt.plot(median_2020_S2.index.values, median_2020_S2['Relative Profit Acumulated'], label='Median S2 2020')
-#plt.plot(median_2020_S2_1.index.values, median_2020_S2_1['Relative Profit Acumulated'], label='Median S2.1 2020')
-#plt.axhline(0, color='r', linestyle = ':')
-#plt.xlabel('Week')
-#plt.ylabel('Relative Balance Accumulated')
-#plt.title('Relative Balance Accumulated Graphic', loc='center')
-#plt.legend()
-#plt.show()
+"""
+Todos los cambios solos son al "VWap EA original"
+Cambio1: Se agrega la simulacion del primer cruce de los emas
+Cambio2: Se agrega la recalculacion de los VWAPS cuando son modifivados de pivotes para evitar dejar pivotes ya rotos DESCARTADO POR MAL DESEMPEÑO
+Cambio3: Se modifica el cambio de los VWAPs para que sean en cada tick en vez de ser en cada vela nueva
+Cambio4: Se cierran todos los trades abiertos a partir de las 9 o 11pm DESCARTADO POR MAL DESEMPEÑO 
+Cambio5: Se utiliza el TrueRisk tanto en compras como en ventas ya que en el codigo original solo se aplica a las compras DESCARTADO POR MAL DESEMPEÑO
+Cambio6: Se invierte la utilizacion del TrueRisk, ahora se usa en ventas y no en las compras DESCARTADO POR MAL DESEMPEÑO
+Cambio7: Se cambian las funciones del TrueRisk por las nuevas ya que en el viejo se usa la del seno que en teoria no tiene sentido por la periodicidad que tiene esta funcion y ademas las nuevas funciones estan pensadas para realizar cambios a partir de los 100 minutos (ParamGenerator53 strategy 2)  ESTE CAMBIO CONLLEVA UNA NUEVA OPT
+Cambio8: Se cambian las funciones del TrueRisk por las nuevas ya que en el viejo se usa la del seno que en teoria no tiene sentido por la periodicidad que tiene esta funcion y ademas las nuevas funciones estan pensadas para realizar cambios a partir de los 100 minutos (ParamGenerator strategy 1)  ESTE CAMBIO CONLLEVA UNA NUEVA OPT
+CambioX: Se eliminan los controles de riesgo por funciones con graficas curvas y se aplica Kelly criterium
+"""
+
+#median_2022_53_2 = getRelevantInfoDF("2022_BT_results_Median_53_Viejo_2")
+# median_2022_53_2_cambio1 = getRelevantInfoDF("2022_BT_results_Median_53_Viejo_2_cambio1")
+# median_2022_53_2_cambio3 = getRelevantInfoDF("2022_BT_results_Median_53_Viejo_2_cambio3")
 
 
-#median_2021_S2 = getRelevantInfoDF("2021_BT_results_Median_S2")
-#median_2021_S2_1 = getRelevantInfoDF("2021_BT_results_Median_S2.1")
-#median_2021_S2_1_RPT_0_5 = getRelevantInfoDF("2021_BT_results_Median_S2.1_RPT_0.5")
+# median_2022_53_2_fixed = getRelevantInfoDF("2022_BT_results_Median_53_Viejo_2_fixed")
+# median_2022_53_2_cambio1_fixed = getRelevantInfoDF("2022_BT_results_Median_53_Viejo_2_cambio1_fixed")
+# median_2022_53_2_cambio3_fixed = getRelevantInfoDF("2022_BT_results_Median_53_Viejo_2_cambio3_fixed")
+#median_2022_FunctOriginal_4_original_fixed = getRelevantInfoDF("2022_BT_results_Median_FunctOriginal_4_original_fixed")
 
+median_2022_FunctOriginal_4_cambio1_fixed = getRelevantInfoDF("2022_BT_results_Median_FunctOriginal_4_cambio1_fixed")
 
-#plt.plot(median_2021_S2.index.values, median_2021_S2['Relative Profit Acumulated'], label='Median S2 2021')
-#plt.plot(median_2021_S2_1.index.values, median_2021_S2_1['Relative Profit Acumulated'], label='Median S2.1 2021')
-#plt.plot(median_2021_S2_1_RPT_0_5.index.values, median_2021_S2_1_RPT_0_5['Relative Profit Acumulated'], label='Median S2.1 RTP 0.5 2021')
-#plt.axhline(0, color='r', linestyle = ':')
-#plt.xlabel('Week')
-#plt.ylabel('Relative Balance Accumulated')
-#plt.title('Relative Balance Accumulated Graphic', loc='center')
-#plt.legend()
-#plt.show()
+median_2022_FunctOriginal_4_cambio2_fixed = getRelevantInfoDF("2022_BT_results_Median_FunctOriginal_4_cambio2_fixed")
 
+median_2022_FunctOriginal_4_cambio3_fixed = getRelevantInfoDF("2022_BT_results_Median_FunctOriginal_4_cambio3_fixed")
 
-#median_2022_S2 = getRelevantInfoDF("2022_BT_results_Median_S2")
-median_2022_S2_1 = getRelevantInfoDF("2022_BT_results_Median_S2.1")
-median_2022_S2_2 = getRelevantInfoDF("2022_BT_results_Median_S2_2.0")
+#plt.plot(median_2022_53_2.index.values, median_2022_53_2['Relative Profit Acumulated'], label='Median 53 viejo 2')
+# plt.plot(median_2022_53_2_cambio1.index.values, median_2022_53_2_cambio1['Relative Profit Acumulated'], label='Median 53 viejo 2 cambio1')
+# plt.plot(median_2022_53_2_cambio3.index.values, median_2022_53_2_cambio3['Relative Profit Acumulated'], label='Median 53 viejo 2 cambio3')
 
-#plt.plot(median_2022_S2.index.values, median_2022_S2['Relative Profit Acumulated'], label='Median S2 2022')
-plt.plot(median_2022_S2_1.index.values, median_2022_S2_1['Relative Profit Acumulated'], label='Median S2.1 2022 hasta W43 version 1.0')
-plt.plot(median_2022_S2_2.index.values, median_2022_S2_2['Relative Profit Acumulated'], label='Median S2 2.0 2022 hasta W44')
+# plt.plot(median_2022_53_2_fixed.index.values, median_2022_53_2_fixed['Relative Profit Acumulated'], label='Median 53 viejo 2 fixed')
+# plt.plot(median_2022_53_2_cambio1_fixed.index.values, median_2022_53_2_cambio1_fixed['Relative Profit Acumulated'], label='Median 53 viejo 2 cambio1 fixed')
+# plt.plot(median_2022_53_2_cambio3_fixed.index.values, median_2022_53_2_cambio3_fixed['Relative Profit Acumulated'], label='Median 53 viejo 2 cambio3 fixed')
+#plt.plot(median_2022_FunctOriginal_4_original_fixed.index.values, median_2022_FunctOriginal_4_original_fixed['Relative Profit Acumulated'], label='Median Funcion Original Strategy 4 codigo original fixed')
+
+#plt.plot(median_2022_FunctOriginal_4_cambio1_fixed.index.values, median_2022_FunctOriginal_4_cambio1_fixed['Relative Profit Acumulated'], label='Median Funcion Original Strategy 4 cambio1 fixed')
+
+#plt.plot(median_2022_FunctOriginal_4_cambio2_fixed.index.values, median_2022_FunctOriginal_4_cambio2_fixed['Relative Profit Acumulated'], label='Median Funcion Original Strategy 4 cambio2 fixed')
+
+plt.plot(median_2022_FunctOriginal_4_cambio3_fixed.index.values, median_2022_FunctOriginal_4_cambio3_fixed['Relative Profit Acumulated'], label='Median Funcion Original Strategy 4 cambio3 fixed')
+
 plt.axhline(0, color='r', linestyle = ':')
 plt.xlabel('Week')
 plt.ylabel('Relative Balance Accumulated')

@@ -4,7 +4,7 @@ $ProyectPath = $jsonPath.proyectPath
 $mt5OutPutPath  = $jsonPath.mt5OutPutPath
 cd $terminalPath
 
-$fileArray = Get-ChildItem -Path "$($ProyectPath)\2022_BT_ini" -Recurse -Filter *.ini 
+$fileArray = Get-ChildItem -Path "$($ProyectPath)\2023_BT_ini" -Recurse -Filter *.ini 
 
 $totalfiles = $fileArray.length
 $i = 1
@@ -16,7 +16,7 @@ Foreach-Object {
     $yearWeek = $_.Name.Substring(27,$_.Name.length-4-27)
     Write-Host $yearWeek
 
-    Copy-Item -Path "$($ProyectPath)\2022_BT_sets\$($yearWeek.Substring(4)).set" -Destination "$($mt5OutPutPath)\MQL5\Profiles\Tester"
+    Copy-Item -Path "$($ProyectPath)\2023_BT_sets\$($yearWeek.Substring(4)).set" -Destination "$($mt5OutPutPath)\MQL5\Profiles\Tester"
     if (!(Test-Path "$($ProyectPath)\$($year)_BT_results\$($yearWeek).htm") ) {
         .\terminal64.exe /config:$($_.FullName)
         $btResult = "$($mt5OutPutPath)\$($yearWeek).htm"

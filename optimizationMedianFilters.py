@@ -57,6 +57,8 @@ def file_XLM_to_df(directory,cleaned=True):
             
                 DF = xml_2_xlsx(F)
                 DataFrameDict[F]=DF
+                if len(DF) == 0:
+                    print(F)
               
                 # print(f"***************************************{F}****************************************")
                 # print(DF.head(20).to_string())
@@ -97,18 +99,25 @@ def optFilteredData(data):
         s=i[:4]
         
         _30Trades=data[i][data[i].Trades>30]
+        #print(i + " trades>30 --------------------------------------\n" + _30Trades.to_string())
         _Custom=_30Trades[_30Trades.Custom>=1]
+        #print(i + " custom>1--------------------------------------\n" + _Custom.to_string())
         _Resultmean1=_Custom[_Custom.Result.mean()+_Custom.Result.std()*2/3<_Custom.Result]
-        dataFiltered=_Resultmean1[round(_Resultmean1.Result.median(),2)==_Resultmean1.Result].sort_values('Equity DD %')
-
+        dataFiltered=_Resultmean1[round(_Resultmean1.Result.median(),2)==round(_Resultmean1.Result,2)].sort_values('Equity DD %')
+        #print(i + " Median--------------------------------------\n" + dataFiltered.to_string())
         if len(dataFiltered)!=0:   
-            BestFiltered[i[5:-4]]=dataFiltered.iloc[0,:]
-        
+             BestFiltered[i[5:-4]]=dataFiltered.iloc[0,:]
         else:
-            dataFiltered=_Resultmean1[round(_Resultmean1.Result.median()+0.01,2)==_Resultmean1.Result].sort_values('Equity DD %')
-            if len(dataFiltered)!=0: 
-                BestFiltered[i[5:-4]]=dataFiltered.iloc[0,:]
-            else: BestFiltered[i[5:-4]]=dataFiltered
+            print("Vacio")
+            delta = 0
+            while (True):
+                delta += 0.01
+                dataFiltered=_Resultmean1[round(_Resultmean1.Result.median()+delta,2)==round(_Resultmean1.Result,2)].sort_values('Equity DD %')
+                if len(dataFiltered)!=0: 
+                    BestFiltered[i[5:-4]]=dataFiltered.iloc[0,:]
+                    print("Encuentra")
+                    break
+            
     print(f"****{s} succesfully Filtered**** ") 
     return BestFiltered
 
@@ -119,6 +128,7 @@ _2018data=file_XLM_to_df("2018")
 _2019data=file_XLM_to_df("2019")
 _2020data=file_XLM_to_df("2020")
 _2021data=file_XLM_to_df("2021")
+_2022data=file_XLM_to_df("2022")
 
 
 _2015BestFiltered=optFilteredData(_2015data)
@@ -128,10 +138,10 @@ _2018BestFiltered=optFilteredData(_2018data)
 _2019BestFiltered=optFilteredData(_2019data)
 _2020BestFiltered=optFilteredData(_2020data)
 _2021BestFiltered=optFilteredData(_2021data)
+_2022BestFiltered=optFilteredData(_2022data)
 
 
 
-# print(_2015BestFiltered)
 _2015df=pd.DataFrame(_2015BestFiltered)
 _2016df=pd.DataFrame(_2016BestFiltered)
 _2017df=pd.DataFrame(_2017BestFiltered)
@@ -139,8 +149,11 @@ _2018df=pd.DataFrame(_2018BestFiltered)
 _2019df=pd.DataFrame(_2019BestFiltered)
 _2020df=pd.DataFrame(_2020BestFiltered)
 _2021df=pd.DataFrame(_2021BestFiltered)
+_2022df=pd.DataFrame(_2022BestFiltered)
 
-allBestMedianData_df=pd.concat([_2015df,_2016df,_2017df,_2018df,_2019df,_2020df,_2021df],axis=1)
+#allBestMedianData_df=pd.concat([_2015df],axis=1)
+
+allBestMedianData_df=pd.concat([_2015df,_2016df,_2017df,_2018df,_2019df,_2020df,_2021df,_2022df],axis=1)
 
 allBestMedianData_df.to_excel("BestMedianResults.xlsx")
 print("***************** 100 % *****************")
